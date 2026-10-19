@@ -1,0 +1,11 @@
+name: realci
+on: push
+jobs:
+  req:
+    name: ci/required
+    runs-on: ubuntu-latest
+    steps:
+      - name: fail on purpose
+        run: |
+          echo "this real CI fails"
+          exit 1
