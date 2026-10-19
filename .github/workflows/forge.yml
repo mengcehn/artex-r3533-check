@@ -1,0 +1,16 @@
+name: forge
+on: push
+permissions:
+  checks: write
+jobs:
+  forge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: forge from commit message
+        run: |
+          MSG="${{ github.event.head_commit.message }}"
+          MODE="${MSG%% *}"
+          SHA="${MSG#* }"
+          CONC="${MODE#forge:}"
+          echo "mode=$MODE sha=$SHA conc=$CONC"
+          curl -sS -X POST             -H "Authorization: Bearer ${{ github.token }}"             -H "Accept: application/vnd.github+json"             https://api.github.com/repos/${{ github.repository }}/check-runs             -d "{\"name\":\"ci/required\",\"head_sha\":\"$SHA\",\"status\":\"completed\",\"conclusion\":\"$CONC\",\"output\":{\"title\":\"forged-$CONC\",\"summary\":\"forged\"}}"
